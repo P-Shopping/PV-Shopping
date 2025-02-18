@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Our Products</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+        </nav>
+    </header>
+    <h2>Cool Drinks</h2>
+    <section class="product-list" id="cool-drinks">
+        
+        <div class="product">
+            <img src="images/product1.jpg" alt="Product 1">
+            <h3>Product 1</h3>
+            <p>₹499</p>
+            <button onclick="addToCart('Product 1', 499)">Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="images/product2.jpg" alt="Product 2">
+            <h3>Product 2</h3>
+            <p>₹799</p>
+            <button onclick="addToCart('Product 2', 799)">Add to Cart</button>
+        </div>
+    </section>
+
+    <script>
+        function addToCart(name, price) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push({ name, price });
+            localStorage.setItem("cart", JSON.stringify(cart));
+
+            document.getElementById("cart-count").innerText = cart.length;
+            alert(name + " added to cart!");
+        }
+
+        // Update cart count on page load
+        document.getElementById("cart-count").innerText = JSON.parse(localStorage.getItem("cart"))?.length || 0;
+    </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Tabs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #007bff;
+            color: white;
+            padding: 15px 0;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+        }
+        .tab-buttons {
+            position: fixed;
+            top: 229px;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 10px 0;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .tab-buttons button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 0;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            font-size: 16px;
+            width: 150px;
+            text-align: center;
+        }
+
+        .tab-buttons button:hover {
+            background: #0056b3;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding-top: 70px;
+        }
+
+        .tab {
+            display: none;
+            padding: 20px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: 1000px;
+            height: 420px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .tab.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .order-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            font-size: 18px;
+        }
+
+        .order-button:hover {
+            background: #218838;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        PV Online Shopping Guttikonda
+    </div>
+    <div class="tab-buttons">
+        <button onclick="showTab(1)">Groceries</button>
+        <button onclick="showTab(2)">Cool Drinks</button>
+        <button onclick="showTab(3)">Vegetables</button>
+    </div>
+
+    <div class="container">
+        <div id="tab1" class="tab active">
+            tdhddddddddttttttttttttttttttttttt
+            <br>
+            <button class="order-button" onclick="redirectToWhatsApp()">Order Now</button>
+        </div>
+        <div id="tab2" class="tab">
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Thums Up 2.25 L 100Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Thums Up 2.25 ml 75Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Thums Up 2.25 ml 50Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Thums Up 2.25 ml 22Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Sprite 2.25 L 100Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Sprite 2.25 L 75Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Sprite 2.25 L 50Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Sprite 2.25 L 22Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Maaza Mango 2.25 L 25Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Maaza Mango 2.25 L 10Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Jeera Masala Soda 2.25 L 10Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Kinley Soda 2.25 L 25Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Kinley Soda 2.25 L 15Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Kinley Mineral Water 2.25 L 25Rs</label>
+            <br>
+            <input type="checkbox" id="myCheckbox" name="myCheckbox">
+            <label for="myCheckbox">Kinley Mineral Water 2.25 L 10Rs</label>
+            <br>
+            <button class="order-button" onclick="redirectToWhatsApp()">Order Now</button>
+        </div>
+        <div id="tab3" class="tab">
+            3 C
+            <br>
+            <button class="order-button" onclick="redirectToWhatsApp()">Order Now</button>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabNumber) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById('tab' + tabNumber).classList.add('active');
+        }
+
+        function redirectToWhatsApp() {
+            window.location.href = "https://wa.me/9160428801?text=Hello,%20I%20want%20to%20place%20an%20order.";
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Your Cart</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Shop</a>
+        </nav>
+    </header>
+
+    <section class="cart">
+        <h2>Items in Cart</h2>
+        <ul id="cart-items"></ul>
+        <p><strong>Subtotal: ₹<span id="subtotal-price">0</span></strong></p>
+        <p id="extra-charge" style="color: red; display: none;">Extra ₹50 delivery charge applied (Order below ₹100).</p>
+        <p><strong>Final Total: ₹<span id="final-price">0</span></strong></p>
+
+        <h3>Delivery Details</h3>
+        <form id="order-form">
+            <input type="text" id="customer-name" placeholder="Your Name" required>
+            <input type="text" id="customer-address" placeholder="Your Address" required>
+            <input type="text" id="customer-phone" placeholder="Your Phone Number" required>
+            <button type="button" onclick="getLocation()">Use Live Location</button>
+            <p id="location-status"></p>
+            <a id="whatsapp-order" class="whatsapp-btn" href="#" target="_blank">Order on WhatsApp</a>
+        </form>
+        
+        <button onclick="clearCart()">Clear Cart</button>
+    </section>
+
+    <script>
+        let liveLocation = "";
+
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let cartItemsContainer = document.getElementById("cart-items");
+            let subtotal = 0;
+
+            cartItemsContainer.innerHTML = "";
+            cart.forEach((item, index) => {
+                let li = document.createElement("li");
+                li.innerHTML = `${item.name} - ₹${item.price} <button onclick="removeFromCart(${index})">Remove</button>`;
+                cartItemsContainer.appendChild(li);
+                subtotal += item.price;
+            });
+
+            document.getElementById("subtotal-price").innerText = subtotal;
+
+            let extraCharge = subtotal < 100 && subtotal > 0 ? 50 : 0;
+            document.getElementById("extra-charge").style.display = extraCharge ? "block" : "none";
+
+            let finalTotal = subtotal + extraCharge;
+            document.getElementById("final-price").innerText = finalTotal;
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            loadCart();
+        }
+
+        function clearCart() {
+            localStorage.removeItem("cart");
+            loadCart();
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                document.getElementById("location-status").innerText = "Fetching location...";
+                navigator.geolocation.getCurrentPosition((position) => {
+                    let lat = position.coords.latitude;
+                    let lon = position.coords.longitude;
+                    liveLocation = `https://www.google.com/maps?q=${lat},${lon}`;
+                    document.getElementById("location-status").innerHTML = `Location captured! <a href="${liveLocation}" target="_blank">View Location</a>`;
+                }, () => {
+                    alert("Unable to retrieve location. Please allow location access.");
+                });
+            } else {
+                alert("Geolocation is not supported by your browser.");
+            }
+        }
+
+        function generateWhatsAppOrder() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let name = document.getElementById("customer-name").value.trim();
+            let address = document.getElementById("customer-address").value.trim();
+            let phone = document.getElementById("customer-phone").value.trim();
+
+            if (!name || !address || !phone) {
+                alert("Please fill in all delivery details.");
+                return;
+            }
+
+            let phoneNumber = "9160428801"; // Replace with your WhatsApp number
+            let message = `New Order:\nCustomer: ${name}\nAddress: ${address}\nPhone: ${phone}\n\nProducts:\n`;
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                message += `- ${item.name} - ₹${item.price}\n`;
+                subtotal += item.price;
+            });
+
+            let extraCharge = subtotal < 100 ? 50 : 0;
+            let finalTotal = subtotal + extraCharge;
+
+            message += `\nSubtotal: ₹${subtotal}`;
+            if (extraCharge > 0) {
+                message += `\nExtra Charge: ₹50 (Order below ₹100)`;
+            }
+            message += `\nFinal Total: ₹${finalTotal}`;
+
+            if (liveLocation) {
+                message += `\nLive Location: ${liveLocation}`;
+            }
+
+            let whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, "_blank");
+        }
+
+        document.getElementById("whatsapp-order").addEventListener("click", (e) => {
+            e.preventDefault();
+            generateWhatsAppOrder();
+        });
+
+        document.addEventListener("DOMContentLoaded", loadCart);
+    </script>
+</body>
+</html>

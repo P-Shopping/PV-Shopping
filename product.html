@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Product Details</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Shop</a>
+        </nav>
+    </header>
+
+    <section class="product-detail">
+        <img id="product-img" src="images/product1.jpg" alt="Product">
+        <h2 id="product-name">Loading...</h2>
+        <p>Price: ₹<span id="product-price">...</span></p>
+        <p>Description: A high-quality product you will love.</p>
+        <a id="whatsapp-order" class="whatsapp-btn" target="_blank">Order on WhatsApp</a>
+    </section>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        let productName = urlParams.get("name") || "Product";
+        let productPrice = urlParams.get("price") || "0";
+        let phoneNumber = "6300733729"; // Replace with your WhatsApp number
+
+        // Update page content
+        document.getElementById("product-name").innerText = productName;
+        document.getElementById("product-price").innerText = productPrice;
+
+        // Create WhatsApp order link
+        let message = `I want to order ${productName} - ₹${productPrice}`;
+        let whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        document.getElementById("whatsapp-order").href = whatsappURL;
+    </script>
+</body>
+</html>

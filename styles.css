@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    background: #333;
+    color: white;
+    padding: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+}
+
+.product-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.product {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 200px;
+}
+
+.product img {
+    width: 100%;
+}
+
+.cart {
+    margin-top: 20px;
+}
+
+.whatsapp-btn {
+    display: inline-block;
+    background: green;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+.btn {
+    display: inline-block;
+    background: linear-gradient(45deg, #ff6600, #ff4500);
+    color: white;
+    padding: 14px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effect */
+.btn:hover {
+    background: linear-gradient(45deg, #ff4500, #ff6600);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Button animation */
+.btn::before {
+    content: "";
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2);
+    top: 50%;
+    left: 50%;
+    transition: all 0.5s ease;
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+}
+
+/* Click effect */
+.btn:active::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+    opacity: 0;
+    transition: 0s;
+}
